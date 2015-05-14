@@ -1,0 +1,48 @@
+if(HWSERIAL.available() >= PACKET_SIZE) {
+    if(readInPacket(buf)) {
+      /*Serial.print("[");
+      Serial.print((int)buf[0]);
+      Serial.print("][");
+      Serial.print((int)buf[1]);
+      Serial.print("][");
+      Serial.print((int)buf[2]);
+      Serial.print("][");
+      Serial.print((int)buf[3]);
+      Serial.print("][");
+      Serial.print((int)buf[4]);
+      Serial.print("][");
+      Serial.print((int)buf[5]);
+      Serial.print("][");
+      Serial.print((int)buf[6]);
+      Serial.print("][");
+      Serial.print((int)buf[7]);
+      Serial.print("][");
+      Serial.print((char)buf[8]);
+      Serial.print("][");
+      Serial.print((char)buf[9]);
+      Serial.print("][");
+      Serial.println("]");*/
+      
+      // left motor settings 
+      if(buf[1] == 1) {
+         motor_left.setDirection(MOTOR_FWD); }
+      else if(buf[1] == 2) {
+         motor_left.setDirection(MOTOR_BWD); }
+      vel = 0;
+      vel += ((int)buf[2] % 23);
+      vel += (float)((int)buf[3] % 100)/100;
+     //Serial.print(vel);
+     //Serial.print("\t");
+      motor_left.setVelocity(vel);
+         
+      if(buf[4] == 1) {
+         motor_right.setDirection(MOTOR_FWD); }
+      else if(buf[4] == 2) {
+         motor_right.setDirection(MOTOR_BWD); }
+      vel = 0;
+      vel += ((int)buf[5] % 23);
+      vel += (float)((int)buf[6] % 100)/100; 
+      motor_right.setVelocity(vel);
+      //Serial.println(vel);
+    }
+    }
